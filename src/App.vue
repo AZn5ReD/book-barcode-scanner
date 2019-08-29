@@ -1,16 +1,33 @@
 <template>
   <div id="app">
-    <Camera />
+    <Camera @newCode="showNewCode($event)" />
+    <Popup v-if="showPopup" :code="code" />
   </div>
 </template>
 
 <script>
 import Camera from "./components/Camera";
+import Popup from "./components/Popup";
 
 export default {
   name: "app",
   components: {
-    Camera
+    Camera,
+    Popup
+  },
+  data() {
+    return {
+      books: [],
+      book: {},
+      showPopup: false,
+      code: ""
+    };
+  },
+  methods: {
+    showNewCode(code) {
+      this.code = code;
+      this.showPopup = true;
+    }
   }
 };
 </script>
@@ -18,7 +35,8 @@ export default {
 <style>
 html,
 body {
-  height: 100%;
+  width: 100%;
+  background-color: black;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -26,6 +44,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100%;
+  background-color: black;
+  width: 100%;
 }
 </style>
