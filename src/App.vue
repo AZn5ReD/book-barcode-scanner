@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Camera @newCode="showNewCode($event)" />
-    <Popup v-if="showPopup" :code="code" />
+    <Popup v-if="showPopup" :code="code" :book="book" />
   </div>
 </template>
 
@@ -24,9 +24,27 @@ export default {
     };
   },
   methods: {
-    showNewCode(code) {
-      this.code = code;
-      this.showPopup = true;
+    async showNewCode(code) {
+      if (this.controlCode(code)) {
+        const title = await this.getBookInfo(code);
+        this.code = code;
+        this.showPopup = true;
+      }
+    },
+    controlCode(code) {
+      if (code.length === 10 || code.length === 13) return true;
+      else return false;
+    },
+    async getBookInfo(code) {
+      const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + code;
+
+      const response = await fetch(url);
+      const results = await response.json();
+
+      if (results.totalItems) {
+        this.book = results.items[0];
+      }
+      return this.book ? true : false;
     }
   }
 };

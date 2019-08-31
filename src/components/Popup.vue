@@ -2,7 +2,7 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container">{{ code }}</div>
+        <div class="modal-container">{{ code }} {{ book }}</div>
       </div>
     </div>
   </transition>
@@ -12,7 +12,16 @@
 export default {
   name: "Popup",
   props: {
-    code: ""
+    code: "",
+    book: ""
+    // var title = book["volumeInfo"]["title"];
+    // var subtitle = book["volumeInfo"]["subtitle"];
+    // var authors = book["volumeInfo"]["authors"];
+    // var printType = book["volumeInfo"]["printType"];
+    // var pageCount = book["volumeInfo"]["pageCount"];
+    // var publisher = book["volumeInfo"]["publisher"];
+    // var publishedDate = book["volumeInfo"]["publishedDate"];
+    // var webReaderLink = book["accessInfo"]["webReaderLink"];
   }
 };
 </script>
