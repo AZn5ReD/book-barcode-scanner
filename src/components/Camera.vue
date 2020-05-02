@@ -48,7 +48,7 @@ export default {
         }
       }.bind(this)
     );
-    document.querySelector("video").requestFullscreen();
+    // document.querySelector("video").requestFullscreen();
   },
   destroyed() {
     Quagga.stop();
